@@ -1,0 +1,172 @@
+import random
+
+# Game data
+words = ['python', 'programming', 'hangman', 'computer', 'keyboard', 
+         'developer', 'software', 'algorithm', 'variable', 'function']
+
+# Hangman drawings
+hangman_pictures = [
+    """
+       -----
+       |   |
+       O   |
+      /|\\  |
+      / \\  |
+           |
+    --------
+    """,
+    """
+       -----
+       |   |
+       O   |
+      /|\\  |
+      /    |
+           |
+    --------
+    """,
+    """
+       -----
+       |   |
+       O   |
+      /|\\  |
+           |
+           |
+    --------
+    """,
+    """
+       -----
+       |   |
+       O   |
+      /|   |
+           |
+           |
+    --------
+    """,
+    """
+       -----
+       |   |
+       O   |
+       |   |
+           |
+           |
+    --------
+    """,
+    """
+       -----
+       |   |
+       O   |
+           |
+           |
+           |
+    --------
+    """,
+    """
+       -----
+       |   |
+           |
+           |
+           |
+           |
+    --------
+    """
+]
+
+def choose_word():
+    """Randomly select a word from the list"""
+    return random.choice(words)
+
+def display_game_status(word_status, guessed_letters, attempts_left):
+    """Display the current game status"""
+    print("\n" + "="*40)
+    print("Word: " + " ".join(word_status))
+    print(f"Guessed letters: {', '.join(sorted(guessed_letters))}")
+    print(f"Attempts left: {attempts_left}")
+    print(hangman_pictures[attempts_left])
+
+def get_player_guess(guessed_letters):
+    """Get a valid letter guess from the player"""
+    while True:
+        guess = input("\nEnter your guess (a single letter): ").lower()
+        
+        if len(guess) != 1:
+            print("Please enter exactly one letter!")
+        elif not guess.isalpha():
+            print("Please enter a letter from A to Z!")
+        elif guess in guessed_letters:
+            print("You already guessed that letter. Try a different one!")
+        else:
+            return guess
+
+def update_word_status(word, word_status, guess):
+    """Update the word status with correct guesses"""
+    found = False
+    for i in range(len(word)):
+        if word[i] == guess:
+            word_status[i] = guess
+            found = True
+    return found
+
+def check_win(word_status):
+    """Check if player has won"""
+    return '_' not in word_status
+
+def play_hangman():
+    """Main function to play the hangman game"""
+    print("Welcome to Hangman!")  # Fixed: Removed extra quotation mark
+    print("Guess the word one letter at a time.")
+    print("You have 6 attempts. Good luck!")
+    
+    while True:
+        # Setup new game
+        secret_word = choose_word()
+        word_status = ['_'] * len(secret_word)
+        guessed_letters = []
+        attempts_left = 6
+        game_over = False
+        
+        # Game loop
+        while not game_over:
+            # Display current status
+            display_game_status(word_status, guessed_letters, attempts_left)
+            
+            # Get player's guess
+            guess = get_player_guess(guessed_letters)
+            guessed_letters.append(guess)
+            
+            # Check if guess is correct
+            if guess in secret_word:
+                print(f"\nGood job! '{guess}' is in the word!")  # Fixed: Removed extra space
+                update_word_status(secret_word, word_status, guess)
+                
+                # Check for win
+                if check_win(word_status):
+                    display_game_status(word_status, guessed_letters, attempts_left)
+                    print(f"\nCongratulations! You won!")  # Fixed: Removed extra space
+                    print(f"The word was: {secret_word}")
+                    game_over = True
+            else:
+                attempts_left -= 1
+                print(f"\nSorry! '{guess}' is not in the word.")  # Fixed: Removed extra space
+                
+                # Check for loss
+                if attempts_left == 0:
+                    display_game_status(word_status, guessed_letters, attempts_left)
+                    print(f"\nGame Over! The word was: {secret_word}")  # Fixed: Removed extra space
+                    game_over = True
+        
+        # Ask to play again
+        while True:
+            play_again = input("\nWould you like to play again? (y/n): ").lower()
+            if play_again in ['y', 'yes']:
+                print("\n" + "="*40)
+                print("Starting new game...")
+                break
+            elif play_again in ['n', 'no']:
+                print("\nThanks for playing Hangman! Goodbye!")  # Fixed: Removed extra space
+                return
+            else:
+                print("Please enter 'y' for yes or 'n' for no.")
+
+# Start the game
+if __name__ == "__main__":
+    play_hangman()
