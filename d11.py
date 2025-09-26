@@ -1,3 +1,8 @@
+# Blackjack Game - Day 11
+# Concepts: Advanced game logic, state management, algorithm design, system integration
+# Features: Complete Blackjack rules, ace handling, cross-platform UI, professional architecture
+
+
 import random
 
 logo = """
@@ -99,3 +104,4 @@ while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y"
 
 if __name__ == "__main__":
     main()
+
