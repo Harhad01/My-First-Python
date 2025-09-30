@@ -23,6 +23,7 @@ print(logo)
 import random
 import os
 
+
 data = [
     {
         'name': 'Instagram',
@@ -389,6 +390,7 @@ while game_continue:
 
     
     
+
 
 
 
