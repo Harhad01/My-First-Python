@@ -38,7 +38,7 @@ HANGMAN_PICS = ['''
      ===''']
 word_list = ["Lionel Messi", "Cristiano Ronaldo", "Pelé", "Maradona", "Johan Cruyff", 
              "Beckenbauer", "Zidane", "Costacurta", "Modric", "Platini", "Kroos",
-             "Totti", "Ferenc Puskás", "Thuram", "Garrincha", 
+             "Totti", "Puskás", "Thuram", "Garrincha", 
              "Van Basten", "Baresi", "Paolo Maldini", "Matthäus",  "Baggio", 
              "Romario", "Ronaldinho", "Thierry Henry", "Iniesta", "Xavi Hernández", "Pirlo",
              "Steven Gerrard", "Frank Rijkaard", "Gullit", "Rummenigge", "Gerd Müller"]
@@ -117,6 +117,7 @@ def play_hangman():
             
 print("Welcome to Guessing THE PRODIGY'S of Game!!!⚽")
 play_hangman()
+
 
 
 
