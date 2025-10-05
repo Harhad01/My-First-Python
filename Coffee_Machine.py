@@ -1,14 +1,14 @@
 MENU = {
     "espresso": {
-        "ingredients": {"water": 50, "coffee": 18},
+        "ingredients": {"water": 500, "coffee": 300},
         "cost": 1.5,
     },
     "latte": {
-        "ingredients": {"water": 200, "milk": 150, "coffee": 24},
+        "ingredients": {"water": 500, "milk": 600, "coffee": 36},
         "cost": 2.5,
     },
     "cappuccino": {
-        "ingredients": {"water": 250, "milk": 100, "coffee": 24},
+        "ingredients": {"water": 500, "milk": 600, "coffee": 36},
         "cost": 3.0,
     }
 }
@@ -16,9 +16,9 @@ MENU = {
 profit = 0
 
 resources = {
-    "water": 300,
-    "milk": 200,
-    "coffee": 100,
+    "water": 30000,
+    "milk": 20000,
+    "coffee": 1000,
 }
 
 def is_resource_sufficient(order_ingredients):
@@ -75,6 +75,7 @@ while machine_on:
             payment = process_coins()
             if is_transaction_successful(payment, drink["cost"]):
                 make_coffee(choice, drink["ingredients"])
+
 
 
 
